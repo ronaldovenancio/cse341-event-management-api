@@ -14,10 +14,14 @@ const options = {
     },
     servers: [
       {
+         url: 'https://cse341-event-management-api.onrender.com',
+        description: 'Production server'
+      },
+      {
         url: 'http://localhost:3000',
         description: 'Local server'
       }
-    ]
+     ]
   },
     apis: ['./routes/*.js', './server.js']
 };
