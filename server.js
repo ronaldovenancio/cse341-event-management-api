@@ -1,3 +1,4 @@
+const venuesRouter = require('./routes/venues');
 const express = require('express');
 require('dotenv').config();
 
@@ -6,6 +7,7 @@ const { initDb } = require('./db/connect');
 const app = express();
 
 app.use(express.json());
+app.use('/venues', venuesRouter);
 
 app.get('/', (req, res) => {
   res.send('Event Management API is running');
