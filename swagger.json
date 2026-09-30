@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Event Management API",
+    "description": "API for managing events, venues, registrations and users.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "tags": [{ "name": "Events", "description": "Event endpoints" }],
+  "paths": {
+    "/events": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Get all events",
+        "description": "Public. Returns every event in the events collection.",
+        "responses": {
+          "200": {
+            "description": "List of events",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/Event" } }
+          },
+          "500": { "description": "Server error" }
+        }
+      },
+      "post": {
+        "tags": ["Events"],
+        "summary": "Create an event (authentication required)",
+        "description": "Requires an active user session. The referenced venueId must exist.",
+        "parameters": [
+          { "name": "body", "in": "body", "required": true, "schema": { "$ref": "#/definitions/EventInput" } }
+        ],
+        "responses": {
+          "201": { "description": "Event created", "schema": { "$ref": "#/definitions/EventCreated" } },
+          "400": { "description": "Validation failed", "schema": { "$ref": "#/definitions/ValidationError" } },
+          "401": { "description": "Not authenticated" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/events/{id}": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Get a single event by id",
+        "description": "Public.",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "24-character event id" }
+        ],
+        "responses": {
+          "200": { "description": "The event", "schema": { "$ref": "#/definitions/Event" } },
+          "400": { "description": "Invalid id format" },
+          "404": { "description": "Event not found" },
+          "500": { "description": "Server error" }
+        }
+      },
+      "put": {
+        "tags": ["Events"],
+        "summary": "Update an event (authentication required)",
+        "description": "Requires an active user session. Replaces all event fields; every field is required.",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "24-character event id" },
+          { "name": "body", "in": "body", "required": true, "schema": { "$ref": "#/definitions/EventInput" } }
+        ],
+        "responses": {
+          "204": { "description": "Event updated" },
+          "400": { "description": "Validation failed or invalid id", "schema": { "$ref": "#/definitions/ValidationError" } },
+          "401": { "description": "Not authenticated" },
+          "404": { "description": "Event not found" },
+          "500": { "description": "Server error" }
+        }
+      },
+      "delete": {
+        "tags": ["Events"],
+        "summary": "Delete an event",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "24-character event id" }
+        ],
+        "responses": {
+          "204": { "description": "Event deleted" },
+          "400": { "description": "Invalid id format" },
+          "404": { "description": "Event not found" },
+          "500": { "description": "Server error" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Event": {
+      "type": "object",
+      "properties": {
+        "_id": { "type": "string", "example": "64f1a2b3c4d5e6f7a8b9c0d1" },
+        "title": { "type": "string", "example": "Community Health Fair" },
+        "description": { "type": "string", "example": "Free screenings and health talks for the community." },
+        "eventDate": { "type": "string", "example": "2026-11-14", "description": "YYYY-MM-DD" },
+        "startTime": { "type": "string", "example": "09:00", "description": "24-hour HH:MM" },
+        "endTime": { "type": "string", "example": "15:30", "description": "24-hour HH:MM, later than startTime" },
+        "venueId": { "type": "string", "example": "64f1a2b3c4d5e6f7a8b9c0d2" },
+        "category": { "type": "string", "example": "Health" },
+        "capacity": { "type": "integer", "example": 250 },
+        "organizerId": { "type": "string", "example": "64f1a2b3c4d5e6f7a8b9c0d3" }
+      }
+    },
+    "EventInput": {
+      "type": "object",
+      "required": ["title", "description", "eventDate", "startTime", "endTime", "venueId", "category", "capacity", "organizerId"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 100, "example": "Community Health Fair" },
+        "description": { "type": "string", "minLength": 1, "maxLength": 1000, "example": "Free screenings and health talks for the community." },
+        "eventDate": { "type": "string", "example": "2026-11-14", "description": "YYYY-MM-DD" },
+        "startTime": { "type": "string", "example": "09:00", "description": "24-hour HH:MM" },
+        "endTime": { "type": "string", "example": "15:30", "description": "24-hour HH:MM, later than startTime" },
+        "venueId": { "type": "string", "example": "64f1a2b3c4d5e6f7a8b9c0d2", "description": "Id of an existing venue" },
+        "category": { "type": "string", "minLength": 1, "maxLength": 50, "example": "Health" },
+        "capacity": { "type": "integer", "minimum": 1, "example": 250 },
+        "organizerId": { "type": "string", "example": "64f1a2b3c4d5e6f7a8b9c0d3" }
+      }
+    },
+    "EventCreated": {
+      "type": "object",
+      "properties": { "id": { "type": "string", "example": "64f1a2b3c4d5e6f7a8b9c0d1" } }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "message": { "type": "string", "example": "Validation failed" },
+        "errors": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "example": { "endTime": "endTime must be later than startTime" }
+        }
+      }
+    }
+  }
+}
