@@ -29,9 +29,19 @@ app.use('/api-docs', swaggerRouter);
  *               example: Event Management API is running
  */
 
+app.use('/events', require('./routes/events'));
+
 app.get('/', (req, res) => {
   res.send('Event Management API is running');
 });
+
+// central error handler (keeps internals out of responses)
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ message: 'Internal server error' });
+});
+
+
 
 const port = process.env.PORT || 3000;
 
