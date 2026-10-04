@@ -1,323 +1,279 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
     "title": "Event Management API",
-    "version": "1.0.0",
-    "description": "API for managing events, venues, registrations, and users."
+    "description": "API for managing events, venues, registrations and users.",
+    "version": "1.0.0"
   },
-  "servers": [
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
     {
-      "url": "https://cse341-event-management-api.onrender.com",
-      "description": "Production server"
-    },
-    {
-      "url": "http://localhost:3000",
-      "description": "Local server"
+      "name": "Events",
+      "description": "Event endpoints"
     }
   ],
+  "schemes": [
+    "http"
+  ],
   "paths": {
-    "/venues": {
+    "/": {
       "get": {
-        "summary": "Get all venues",
-        "tags": [
-          "Venues"
-        ],
+        "description": "",
         "responses": {
           "200": {
-            "description": "List of venues",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Venue"
-                  }
-                }
-              }
-            }
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api-docs/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/venues/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
-            "description": "Unexpected server error"
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
-        "summary": "Create a new venue",
-        "tags": [
-          "Venues"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "name",
-                  "address",
-                  "city",
-                  "state",
-                  "country",
-                  "capacity"
-                ],
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "Recife Convention Center"
-                  },
-                  "address": {
-                    "type": "string",
-                    "example": "Av. Example, 1000"
-                  },
-                  "city": {
-                    "type": "string",
-                    "example": "Recife"
-                  },
-                  "state": {
-                    "type": "string",
-                    "example": "PE"
-                  },
-                  "country": {
-                    "type": "string",
-                    "example": "Brazil"
-                  },
-                  "capacity": {
-                    "type": "integer",
-                    "example": 500
-                  }
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "address": {
+                  "example": "any"
+                },
+                "city": {
+                  "example": "any"
+                },
+                "state": {
+                  "example": "any"
+                },
+                "country": {
+                  "example": "any"
+                },
+                "capacity": {
+                  "example": "any"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "201": {
-            "description": "Venue created successfully"
+            "description": "Created"
           },
           "400": {
-            "description": "Validation failed"
+            "description": "Bad Request"
           },
           "500": {
-            "description": "Unexpected server error"
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/venues/{id}": {
       "get": {
-        "summary": "Get a venue by ID",
-        "tags": [
-          "Venues"
-        ],
+        "description": "",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Venue found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Venue"
-                }
-              }
-            }
+            "description": "OK"
           },
           "400": {
-            "description": "Invalid venue ID"
+            "description": "Bad Request"
           },
           "404": {
-            "description": "Venue not found"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Unexpected server error"
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
-        "summary": "Update a venue",
-        "tags": [
-          "Venues"
-        ],
+        "description": "",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
             "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "name",
-                  "address",
-                  "city",
-                  "state",
-                  "country",
-                  "capacity"
-                ],
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "address": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  },
-                  "country": {
-                    "type": "string"
-                  },
-                  "capacity": {
-                    "type": "integer"
-                  }
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "address": {
+                  "example": "any"
+                },
+                "city": {
+                  "example": "any"
+                },
+                "state": {
+                  "example": "any"
+                },
+                "country": {
+                  "example": "any"
+                },
+                "capacity": {
+                  "example": "any"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "204": {
-            "description": "Venue updated successfully"
+            "description": "No Content"
           },
           "400": {
-            "description": "Invalid input or venue ID"
+            "description": "Bad Request"
           },
           "404": {
-            "description": "Venue not found"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Unexpected server error"
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "summary": "Delete a venue",
-        "tags": [
-          "Venues"
-        ],
+        "description": "",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "Venue deleted successfully"
+            "description": "No Content"
           },
           "400": {
-            "description": "Invalid venue ID"
+            "description": "Bad Request"
           },
           "404": {
-            "description": "Venue not found"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Unexpected server error"
+            "description": "Internal Server Error"
           }
         }
       }
     },
-    "/events": {
+    "/events/": {
       "get": {
-        "summary": "Get all events",
         "tags": [
           "Events"
         ],
+        "summary": "Get all events",
+        "description": "",
         "responses": {
           "200": {
             "description": "List of events",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Event"
-                  }
-                }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              },
+              "xml": {
+                "name": "main"
               }
             }
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Server error"
           }
         }
       },
       "post": {
-        "summary": "Create an event",
         "tags": [
           "Events"
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EventInput"
-              }
+        "summary": "Create an event (authentication required)",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventInput"
             }
           }
-        },
+        ],
         "responses": {
           "201": {
-            "description": "Event created"
+            "description": "Event created",
+            "schema": {
+              "$ref": "#/definitions/EventCreated"
+            }
           },
           "400": {
             "description": "Validation failed"
           },
-          "500": {
-            "description": "Internal server error"
+          "401": {
+            "description": "Not authenticated"
           }
         }
       }
     },
     "/events/{id}": {
       "get": {
-        "summary": "Get an event by ID",
         "tags": [
           "Events"
         ],
+        "summary": "Get a single event by id",
+        "description": "",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Event found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Event"
-                }
-              }
+            "description": "The event",
+            "schema": {
+              "$ref": "#/definitions/Event"
             }
           },
           "400": {
@@ -325,239 +281,180 @@
           },
           "404": {
             "description": "Event not found"
-          },
-          "500": {
-            "description": "Internal server error"
           }
         }
       },
       "put": {
-        "summary": "Update an event",
         "tags": [
           "Events"
         ],
+        "summary": "Update an event (authentication required)",
+        "description": "",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/EventInput"
             }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EventInput"
-              }
-            }
-          }
-        },
         "responses": {
           "204": {
-            "description": "Event updated successfully"
+            "description": "Event updated"
           },
           "400": {
             "description": "Validation failed or invalid id"
           },
+          "401": {
+            "description": "Not authenticated"
+          },
           "404": {
             "description": "Event not found"
-          },
-          "500": {
-            "description": "Internal server error"
           }
         }
       },
       "delete": {
-        "summary": "Delete an event",
         "tags": [
           "Events"
         ],
+        "summary": "Delete an event",
+        "description": "",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "Event deleted successfully"
+            "description": "Event deleted"
           },
           "400": {
             "description": "Invalid id format"
           },
           "404": {
             "description": "Event not found"
-          },
-          "500": {
-            "description": "Internal server error"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Event": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "64f1a2b3c4d5e6f7a8b9c0d1"
+        },
+        "title": {
+          "type": "string",
+          "example": "Community Health Fair"
+        },
+        "description": {
+          "type": "string",
+          "example": "Free screenings and health talks for the community."
+        },
+        "eventDate": {
+          "type": "string",
+          "example": "2026-11-14"
+        },
+        "startTime": {
+          "type": "string",
+          "example": "09:00"
+        },
+        "endTime": {
+          "type": "string",
+          "example": "15:30"
+        },
+        "venueId": {
+          "type": "string",
+          "example": "64f1a2b3c4d5e6f7a8b9c0d2"
+        },
+        "category": {
+          "type": "string",
+          "example": "Health"
+        },
+        "capacity": {
+          "type": "number",
+          "example": 250
+        },
+        "organizerId": {
+          "type": "string",
+          "example": "64f1a2b3c4d5e6f7a8b9c0d3"
         }
       }
     },
-    "/": {
-      "get": {
-        "summary": "Check if the API is running",
-        "tags": [
-          "Health"
-        ],
-        "responses": {
-          "200": {
-            "description": "API is running successfully",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string",
-                  "example": "Event Management API is running"
-                }
-              }
-            }
-          }
+    "EventInput": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Community Health Fair"
+        },
+        "description": {
+          "type": "string",
+          "example": "Free screenings and health talks for the community."
+        },
+        "eventDate": {
+          "type": "string",
+          "example": "2026-11-14"
+        },
+        "startTime": {
+          "type": "string",
+          "example": "09:00"
+        },
+        "endTime": {
+          "type": "string",
+          "example": "15:30"
+        },
+        "venueId": {
+          "type": "string",
+          "example": "64f1a2b3c4d5e6f7a8b9c0d2"
+        },
+        "category": {
+          "type": "string",
+          "example": "Health"
+        },
+        "capacity": {
+          "type": "number",
+          "example": 250
+        },
+        "organizerId": {
+          "type": "string",
+          "example": "64f1a2b3c4d5e6f7a8b9c0d3"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "eventDate",
+        "startTime",
+        "endTime",
+        "venueId",
+        "category",
+        "capacity",
+        "organizerId"
+      ]
+    },
+    "EventCreated": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "64f1a2b3c4d5e6f7a8b9c0d1"
         }
       }
     }
-  },
-  "components": {
-    "schemas": {
-      "Venue": {
-        "type": "object",
-        "required": [
-          "name",
-          "address",
-          "city",
-          "state",
-          "country",
-          "capacity"
-        ],
-        "properties": {
-          "_id": {
-            "type": "string",
-            "example": "6abc0ee560c932f59bc7c91b"
-          },
-          "name": {
-            "type": "string",
-            "example": "Recife Convention Center"
-          },
-          "address": {
-            "type": "string",
-            "example": "Av. Example, 1000"
-          },
-          "city": {
-            "type": "string",
-            "example": "Recife"
-          },
-          "state": {
-            "type": "string",
-            "example": "PE"
-          },
-          "country": {
-            "type": "string",
-            "example": "Brazil"
-          },
-          "capacity": {
-            "type": "integer",
-            "example": 500
-          }
-        }
-      },
-      "Event": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "eventDate": {
-            "type": "string",
-            "example": "2026-10-15"
-          },
-          "startTime": {
-            "type": "string",
-            "example": "14:00"
-          },
-          "endTime": {
-            "type": "string",
-            "example": "16:00"
-          },
-          "venueId": {
-            "type": "string"
-          },
-          "category": {
-            "type": "string"
-          },
-          "capacity": {
-            "type": "integer"
-          },
-          "organizerId": {
-            "type": "string"
-          }
-        }
-      },
-      "EventInput": {
-        "type": "object",
-        "required": [
-          "title",
-          "description",
-          "eventDate",
-          "startTime",
-          "endTime",
-          "venueId",
-          "category",
-          "capacity",
-          "organizerId"
-        ],
-        "properties": {
-          "title": {
-            "type": "string",
-            "example": "CSE 341 Final Project Demo"
-          },
-          "description": {
-            "type": "string",
-            "example": "Test event for validating the Events API integration."
-          },
-          "eventDate": {
-            "type": "string",
-            "example": "2026-10-15"
-          },
-          "startTime": {
-            "type": "string",
-            "example": "14:00"
-          },
-          "endTime": {
-            "type": "string",
-            "example": "16:00"
-          },
-          "venueId": {
-            "type": "string",
-            "example": "6abd54a6c547f3ae598e41a7"
-          },
-          "category": {
-            "type": "string",
-            "example": "Technology"
-          },
-          "capacity": {
-            "type": "integer",
-            "example": 100
-          },
-          "organizerId": {
-            "type": "string",
-            "example": "507f1f77bcf86cd799439011"
-          }
-        }
-      }
-    }
-  },
-  "tags": []
+  }
 }
