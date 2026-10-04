@@ -14,7 +14,7 @@ const options = {
     },
     servers: [
       {
-         url: 'https://cse341-event-management-api.onrender.com',
+         url: 'https://cse341-events-utph.onrender.com',
         description: 'Production server'
       },
       {
