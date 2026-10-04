@@ -5,7 +5,7 @@
     "description": "API for managing events, venues, registrations and users.",
     "version": "1.0.0"
   },
-  "host": "https://cse341-events-utph.onrender.com",
+  "host": "cse341-events-utph.onrender.com",
   "basePath": "/",
   "tags": [
     {
@@ -14,7 +14,7 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
