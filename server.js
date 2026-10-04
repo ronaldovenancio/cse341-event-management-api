@@ -4,9 +4,11 @@ require('dotenv').config();
 
 const { initDb } = require('./db/connect');
 const swaggerRouter = require('./routes/swagger');
-
+const cors = require('cors');
 const app = express();
 
+
+app.use(cors()); // <-- ADD THIS
 app.use(express.json());
 app.use('/venues', venuesRouter);
 
