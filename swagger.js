@@ -7,7 +7,7 @@ const doc = {
     description: 'API for managing events, venues, registrations and users.',
     version: '1.0.0',
   },
-  host: 'localhost:3000', // change to your Render host when deploying, e.g. 'your-app.onrender.com'
+  host: 'https://cse341-events-utph.onrender.com', // change to your Render host when deploying, e.g. 'your-app.onrender.com'
   schemes: ['http'], // use ['https'] on Render
   tags: [{ name: 'Events', description: 'Event endpoints' }],
   definitions: {
