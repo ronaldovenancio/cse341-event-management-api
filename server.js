@@ -1,4 +1,5 @@
 const venuesRouter = require('./routes/venues');
+const usersRouter = require('./routes/users');
 const express = require('express');
 require('dotenv').config();
 
@@ -9,6 +10,7 @@ const app = express();
 
 app.use(express.json());
 app.use('/venues', venuesRouter);
+app.use('/users', usersRouter);
 
 app.use('/api-docs', swaggerRouter);
 
