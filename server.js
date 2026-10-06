@@ -2,17 +2,32 @@ const venuesRouter = require('./routes/venues');
 const usersRouter = require('./routes/users');
 const registrationsRouter = require('./routes/registrations');
 const express = require('express');
+const session = require('express-session');
+
 require('dotenv').config();
 
+const passport = require('./config/passport');
 const { initDb } = require('./db/connect');
 const swaggerRouter = require('./routes/swagger');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
 app.use(express.json());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/venues', venuesRouter);
 app.use('/users', usersRouter);
 app.use('/registrations', registrationsRouter);
+app.use('/auth', authRouter);
 
 app.use('/api-docs', swaggerRouter);
 

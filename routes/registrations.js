@@ -1,3 +1,4 @@
+const { isAuthenticated } = require('../middleware/auth');
 const router = require('express').Router();
 const controller = require('../controllers/registrations');
 const {
@@ -15,12 +16,14 @@ router.get(
 
 router.post(
   '/',
+  isAuthenticated,
   validateRegistration,
   controller.createRegistration,
 );
 
 router.put(
   '/:id',
+  isAuthenticated,
   validateRegistrationIdParam,
   validateRegistration,
   controller.updateRegistration,

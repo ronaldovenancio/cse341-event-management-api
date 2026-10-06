@@ -1,4 +1,11 @@
-// middleware/auth.js (TEMPORARY stub to be replace with OAuth code)
-const isAuthenticated = (req, res, next) => next();
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    return next();
+  }
+
+  return res.status(401).json({
+    message: 'Not authenticated',
+  });
+};
 
 module.exports = { isAuthenticated };
