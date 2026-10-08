@@ -12,6 +12,7 @@ const swaggerRouter = require('./routes/swagger');
 const authRouter = require('./routes/auth');
 
 const app = express();
+app.set('trust proxy', 1);
 
 app.use(express.json());
 app.use(
@@ -19,6 +20,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    },
   }),
 );
 
