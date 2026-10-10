@@ -7,15 +7,14 @@ const doc = {
     description: 'API for managing events, venues, registrations and users.',
     version: '1.0.0',
   },
-  
-  host: 'cse341-events-utph.onrender.com',
-  schemes: ['https'],
-  tags: [
-    { name: 'Events', description: 'Event endpoints' },
-    { name: 'Venues', description: 'Venue endpoints' },
-    { name: 'Users', description: 'User endpoints' },
-    { name: 'Registrations', description: 'Registration endpoints' },
-  ],
+  host: 'cse341-event-management-api.onrender.com',
+schemes: ['https'],
+tags: [
+  { name: 'Events', description: 'Event endpoints' },
+  { name: 'Venues', description: 'Venue endpoints' },
+  { name: 'Users', description: 'User endpoints' },
+  { name: 'Registrations', description: 'Registration endpoints' },
+],
   definitions: {
     Event: {
       _id: '64f1a2b3c4d5e6f7a8b9c0d1',
