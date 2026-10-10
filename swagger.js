@@ -8,7 +8,7 @@ const doc = {
     version: '1.0.0',
   },
   
-  host: 'cse341-event-management-api.onrender.com',
+  host: 'cse341-events-utph.onrender.com',
   schemes: ['https'],
   tags: [
     { name: 'Events', description: 'Event endpoints' },
