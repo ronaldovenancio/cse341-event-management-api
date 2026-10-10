@@ -13,7 +13,7 @@ const initDb = async () => {
 
   database = client.db();
 
-  console.log('Connected to cse321_event_management');
+  console.log('Connected to MongoDB');
 
   return database;
 };
