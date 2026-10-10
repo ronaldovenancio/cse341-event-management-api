@@ -8,8 +8,8 @@ const doc = {
     version: '1.0.0',
   },
   host: 'cse341-event-management-api-w8sq.onrender.com',
-  schemes: ['https'],
-  basePath: '/',
+schemes: ['https'],
+basePath: '/',
 tags: [
   { name: 'Events', description: 'Event endpoints' },
   { name: 'Venues', description: 'Venue endpoints' },
