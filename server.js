@@ -1,16 +1,42 @@
 const venuesRouter = require('./routes/venues');
+const usersRouter = require('./routes/users');
+const registrationsRouter = require('./routes/registrations');
 const express = require('express');
+const session = require('express-session');
+
 require('dotenv').config();
 
+const passport = require('./config/passport');
 const { initDb } = require('./db/connect');
 const swaggerRouter = require('./routes/swagger');
 const cors = require('cors');
+const authRouter = require('./routes/auth');
+
 const app = express();
+app.set('trust proxy', 1);
 
 
 app.use(cors()); // <-- ADD THIS
 app.use(express.json());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    },
+  }),
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/venues', venuesRouter);
+app.use('/users', usersRouter);
+app.use('/registrations', registrationsRouter);
+app.use('/auth', authRouter);
 
 app.use('/api-docs', swaggerRouter);
 
