@@ -1,12 +1,21 @@
 {
   "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Event Management API",
     "description": "API for managing events, venues, registrations and users.",
     "version": "1.0.0"
   },
-  "host": "cse341-events-utph.onrender.com",
-  "basePath": "/",
+  "servers": [
+    {
+      "url": "https://cse341-events-utph.onrender.com",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
   "tags": [
     {
       "name": "Events",
@@ -24,9 +33,6 @@
       "name": "Registrations",
       "description": "Registration endpoints"
     }
-  ],
-  "schemes": [
-    "https"
   ],
   "paths": {
     "/": {
@@ -212,114 +218,6 @@
           "401": {
             "description": "Unauthorized"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "Event": {
-      "type": "object",
-      "properties": {
-        "_id": {
-          "type": "string",
-          "example": "64f1a2b3c4d5e6f7a8b9c0d1"
-        },
-        "title": {
-          "type": "string",
-          "example": "Community Health Fair"
-        },
-        "description": {
-          "type": "string",
-          "example": "Free screenings and health talks for the community."
-        },
-        "eventDate": {
-          "type": "string",
-          "example": "2026-11-14"
-        },
-        "startTime": {
-          "type": "string",
-          "example": "09:00"
-        },
-        "endTime": {
-          "type": "string",
-          "example": "15:30"
-        },
-        "venueId": {
-          "type": "string",
-          "example": "64f1a2b3c4d5e6f7a8b9c0d2"
-        },
-        "category": {
-          "type": "string",
-          "example": "Health"
-        },
-        "capacity": {
-          "type": "number",
-          "example": 250
-        },
-        "organizerId": {
-          "type": "string",
-          "example": "64f1a2b3c4d5e6f7a8b9c0d3"
-        }
-      }
-    },
-    "EventInput": {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string",
-          "example": "Community Health Fair"
-        },
-        "description": {
-          "type": "string",
-          "example": "Free screenings and health talks for the community."
-        },
-        "eventDate": {
-          "type": "string",
-          "example": "2026-11-14"
-        },
-        "startTime": {
-          "type": "string",
-          "example": "09:00"
-        },
-        "endTime": {
-          "type": "string",
-          "example": "15:30"
-        },
-        "venueId": {
-          "type": "string",
-          "example": "64f1a2b3c4d5e6f7a8b9c0d2"
-        },
-        "category": {
-          "type": "string",
-          "example": "Health"
-        },
-        "capacity": {
-          "type": "number",
-          "example": 250
-        },
-        "organizerId": {
-          "type": "string",
-          "example": "64f1a2b3c4d5e6f7a8b9c0d3"
-        }
-      },
-      "required": [
-        "title",
-        "description",
-        "eventDate",
-        "startTime",
-        "endTime",
-        "venueId",
-        "category",
-        "capacity",
-        "organizerId"
-      ]
-    },
-    "EventCreated": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "64f1a2b3c4d5e6f7a8b9c0d1"
         }
       }
     }
