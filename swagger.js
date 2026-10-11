@@ -7,7 +7,7 @@ const doc = {
     description: 'API for managing events, venues, registrations and users.',
     version: '1.0.0',
   },
-  host: 'cse341-event-management-api-w8sq.onrender.com',
+host: 'cse341-event-management-api-w8sq.onrender.com',
 schemes: ['https'],
 basePath: '/',
 tags: [
