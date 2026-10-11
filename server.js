@@ -59,6 +59,11 @@ app.use('/api-docs', swaggerRouter);
 
 app.use('/events', require('./routes/events'));
 
+app.get('/debug-swagger', (req, res) => {
+  const swaggerDoc = require('./swagger.json');
+  res.json(swaggerDoc);
+});
+
 app.get('/', (req, res) => {
   res.send('Event Management API is running');
 });
