@@ -15,13 +15,15 @@ const doc = {
     { name: 'Users', description: 'User endpoints' },
     { name: 'Registrations', description: 'Registration endpoints' },
   ],
-  // ADD THIS - THIS IS WHAT CREATES THE AUTHORIZE BUTTON
-  securityDefinitions: {
-    bearerAuth: {
-      type: 'apiKey',
-      name: 'Authorization',
-      in: 'header',
-      description: 'Enter: Bearer {token} - e.g. Bearer eyJhbG...'
+  // THIS IS THE FIX FOR OAS 3.0
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        description: 'Enter your JWT token'
+      }
     }
   },
   security: [

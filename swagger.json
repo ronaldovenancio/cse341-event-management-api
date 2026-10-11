@@ -28,14 +28,6 @@
   "schemes": [
     "https"
   ],
-  "securityDefinitions": {
-    "bearerAuth": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "Enter: Bearer {token} - e.g. Bearer eyJhbG..."
-    }
-  },
   "paths": {
     "/": {
       "get": {
@@ -329,6 +321,16 @@
           "type": "string",
           "example": "64f1a2b3c4d5e6f7a8b9c0d1"
         }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Enter your JWT token"
       }
     }
   },
