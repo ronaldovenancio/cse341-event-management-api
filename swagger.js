@@ -15,6 +15,20 @@ const doc = {
     { name: 'Users', description: 'User endpoints' },
     { name: 'Registrations', description: 'Registration endpoints' },
   ],
+  // ADD THIS - THIS IS WHAT CREATES THE AUTHORIZE BUTTON
+  securityDefinitions: {
+    bearerAuth: {
+      type: 'apiKey',
+      name: 'Authorization',
+      in: 'header',
+      description: 'Enter: Bearer {token} - e.g. Bearer eyJhbG...'
+    }
+  },
+  security: [
+    {
+      bearerAuth: []
+    }
+  ],
   definitions: {
     Event: {
       _id: '64f1a2b3c4d5e6f7a8b9c0d1',

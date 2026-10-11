@@ -28,6 +28,14 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter: Bearer {token} - e.g. Bearer eyJhbG..."
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -323,5 +331,10 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
 }
