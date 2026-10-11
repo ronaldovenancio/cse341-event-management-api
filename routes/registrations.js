@@ -16,6 +16,7 @@ router.get(
 
 router.post(
   '/',
+  // #swagger.security = [{ "bearerAuth": [] }]
   isAuthenticated,
   validateRegistration,
   controller.createRegistration,
@@ -23,6 +24,7 @@ router.post(
 
 router.put(
   '/:id',
+  // #swagger.security = [{ "bearerAuth": [] }]
   isAuthenticated,
   validateRegistrationIdParam,
   validateRegistration,
@@ -31,6 +33,8 @@ router.put(
 
 router.delete(
   '/:id',
+  // #swagger.security = [{ "bearerAuth": [] }]
+  isAuthenticated,
   validateRegistrationIdParam,
   controller.deleteRegistration,
 );
