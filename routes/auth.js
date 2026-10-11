@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const jwt = require('jsonwebtoken'); // <-- 1. ADD THIS LINE
 
 router.get(
   '/github',
@@ -12,10 +13,19 @@ router.get(
   '/github/callback',
   passport.authenticate('github', {
     failureRedirect: '/auth/failure',
+    session: false // <-- 2. ADD THIS LINE
   }),
   (req, res) => {
+    // <-- 3. REPLACE res.status... WITH THIS:
+    const token = jwt.sign(
+      { id: req.user.id, username: req.user.username },
+      process.env.SESSION_SECRET,
+      { expiresIn: '1d' }
+    );
+
     res.status(200).json({
       message: 'Authentication successful',
+      token: token, // <-- this is your eyJ... token!
       user: req.user,
     });
   },
