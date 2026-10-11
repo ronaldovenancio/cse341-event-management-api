@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ronaldovenancio/cse341-event-management-api#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^18.0.4",
     "express": "^5.2.1",
     "express-session": "^1.19.0",

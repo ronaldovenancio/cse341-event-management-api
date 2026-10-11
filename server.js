@@ -14,6 +14,9 @@ const authRouter = require('./routes/auth');
 const app = express();
 app.set('trust proxy', 1);
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.json());
 app.use(
   session({
